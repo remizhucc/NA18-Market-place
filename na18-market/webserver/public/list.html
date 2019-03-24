@@ -1,0 +1,28 @@
+<div class="container mx-auto mt-5 px-3">
+    <div class="row">
+        <div class="col-4 px-2 py-2" ng-repeat="x in products">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{x.nom}}</h5>
+                    <p class="card-text">{{x.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Vendeur: {{x.idvendeur}}</li>
+                    <li class="list-group-item" ng-if="!x.prixpromotion">Prix: {{x.prix}}€</li>
+                    <li class="list-group-item" style="text-decoration:line-through" ng-if="x.prixpromotion">Prix:
+                        {{x.prix}}$
+                    </li>
+                    <li class="list-group-item" ng-if="x.prixpromotion">Prix Promotion : {{x.prixpromotion}}€</li>
+                </ul>
+                <div class="card-body">
+                    <button style="float: right;" ng-click="ajoutePanier(x.id)" type="button" class="btn btn-primary" >
+                        Ajoute dans mon panier
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

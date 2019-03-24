@@ -1,0 +1,28 @@
+<div class="text-center">
+    <form class="form-signin" name="loginForm" novalidate ng-submit="submitLoginForm()" ng-show="!connected">
+        <h1 class="h3 mb-3 font-weight-normal" ng-model="message">{{message}}</h1>
+        <input class="form-control" type="email" name="email" ng-model="user.email" placeholder="Email addresse"
+               required>
+        <div ng-if="loginForm.email.$invalid&& loginForm.submitted">
+            <div ng-if="loginForm.email.$error.required">
+                Email ne peut pas être vide.
+            </div>
+            <div ng-if="loginForm.email.$error.email">
+                Erreur de format.
+            </div>
+        </div>
+
+
+        <input class="form-control" type="password" name="motDePass" ng-model="user.motDePass" placeholder="Mot de passe" required>
+        <div ng-if="loginForm.motDePass.$invalid&& loginForm.submitted">
+            <div ng-if="loginForm.motDePass.$error.required">
+                Mot de passe ne peut pas être vide.
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+        <button class="btn btn-lg btn-secondary btn-block" onclick="location.href='#!/signup'">Sign up</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+    <button name="logOut" class="my-5 btn btn-lg btn-secondary btn-block btn-logout"  ng-show="connected" ng-click="logOut()">Log out</button>
+</div>

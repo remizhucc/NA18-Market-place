@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>LMAO Welcome to my first market :)</title>
+    <script src="JsLibrary/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="JsLibrary/angular/angular.min.js"></script>
+    <script src="JsLibrary/bootstrap/bootstrap.min.js"></script>
+    <script src="JsLibrary/angular/angular-cookies.min.js"></script>
+    <script src="JsLibrary/angular/angular-route.min.js"></script>
+    <script src="Controller/angularController.js"></script>
+    <link rel="stylesheet" href="JsLibrary/bootstrap/css/bootstrap.min.css">
+    <link href="JsLibrary/bootstrap/css/signin.css" rel="stylesheet">
+    <link href="JsLibrary/bootstrap/css/open-iconic-bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div ng-controller="layout">
+    <div>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <a class="navbar-brand" href="#">
+                <img src="Ressource/Logo_LMAO.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                LMAO
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navigatorBar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/list/Promotion">Promotion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/list/Vetement">Vetement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/list/Chaussure">Chaussure</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/list/Meuble">Meuble</a>
+                    </li>
+                </ul>
+            </div>
+            <span class="navbar-text text-no-select" ng-if="connected" ng-model="identification">
+                Bienvenu {{identification.prenom}} !
+            </span>
+            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex " ng-if="connected">
+                <li class="nav-item dropdown">
+                    <a class="nav-item nav-link dropdown-toggle mr-md-2"  id="bd-versions"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ma compte
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                        <a class="dropdown-item" href="#!/login">Log out</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#!/panier">Mon panier</a>
+                        <a class="dropdown-item" href="#!/commandeList">Mes commandes</a>
+                    </div>
+                </li>
+
+            </ul>
+            <a class="btn btn-bd-login" ng-show="!connected" href="#!/login">Log in</a>
+
+        </nav>
+    </div>
+
+
+</div>
+
+<div class=" container"ng-view>
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="SuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                C'est fait!
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ErrorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                Une erreur s'est passé.
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

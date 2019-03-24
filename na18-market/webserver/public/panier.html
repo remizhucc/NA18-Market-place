@@ -1,0 +1,90 @@
+<div class="text-center">
+    <div class="my-3 row">
+        <span class="py-2 col-2">Mode de livraison</span>
+        <div class="col-2">
+            <select ng-model="modelivraison" class="custom-select">
+                <option selected value="none">Open this select menu</option>
+                <option value="normal">normal</option>
+                <option value="rapide">rapide</option>
+            </select>
+        </div>
+        <span class="py-2 col-3">Information de livraison</span>
+        <div class="col-4">
+            <select ng-model="livraison" class="custom-select">
+                <option selected value="none">Open this select menu</option>
+                <option value="{{x.id}}" ng-repeat="x in adresses">{{x.nom+' '+x.prenom+' '+x.postal}}</option>
+            </select>
+        </div>
+        <div class="col-1">
+            <span class="py-2 oi oi-plus text-left" ng-click="" aria-hidden="true" data-toggle="modal"
+                  data-target="#ajouteAdresse"></span>
+        </div>
+    </div>
+
+    <div class="alert alert-danger" role="alert" ng-show="noinformaiton">
+        Mode de livraion et l'addresse de livraison peuvent pas être vide.
+    </div>
+
+    <ul class="list-group" ng-repeat="x in products">
+        <li name="produit{{x.id}}" class="list-group-item d-flex justify-content-between align-items-center row">
+            <div class="col-3 px-1 text-left">{{x.nom}}</div>
+            <div class="col-3 px-1 row " ng-if="!x.prixpromotion">
+                <div class="col-12 text-center"><span>{{x.prix}}€</span></div>
+            </div>
+            <div class="col-3 px-1 row" ng-if="x.prixpromotion">
+                <div class="col-6 text-right" style="text-decoration:line-through"><span>{{x.prix}}€</span></div>
+                <div class="col-6 text-left"><span>{{x.prixpromotion}}€</span></div>
+            </div>
+            <div class="col-3 px-1" ng-model="x">
+                <input type="number" class="text-center mx-2" ng-change="calcule()" style="width:80px"
+                       ng-model="x.quantite">
+            </div>
+            <div class="col-3 px-1">
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true" ng-click="deleteProduit(x)">&times;</span>
+                </button>
+            </div>
+
+        </li>
+    </ul>
+    <h2 class="my-3 text-right" ng-model="price">Prix total: {{price}}€</h2>
+    <button type="button" class="btn btn-primary" ng-click="genererCommande()">Generer la commande</button>
+</div>
+
+<div class="modal fade" id="ajouteAdresse" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nouvelle adresse</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="ajouteAdresse();">
+                    <div class="form-group">
+                        <label class="col-form-label">Nom:</label>
+                        <input type="text" class="form-control" ng-model="newAdresse.nom" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Prénom:</label>
+                        <input type="text" class="form-control" ng-model="newAdresse.prenom" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Code Postal:</label>
+                        <input type="number" class="form-control" ng-model="newAdresse.postal"
+                               ng-pattern="/^-?[0-9][^\.]*$/" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Adresse:</label>
+                        <textarea class="form-control" ng-model="newAdresse.adresse" required autofocus></textarea>
+                    </div>
+
+                    <button type="submit" class="mx-1 btn btn-primary float-right">Enregistrer</button>
+                    <button type="button" class="mx-1 btn btn-secondary float-right" data-dismiss="modal">Fermer
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

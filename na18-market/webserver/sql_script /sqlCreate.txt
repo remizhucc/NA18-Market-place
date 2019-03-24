@@ -1,0 +1,174 @@
+DROP TABLE Utilisateur CASCADE;
+DROP TABLE Administrateur CASCADE;
+DROP TABLE Vendeur CASCADE;
+DROP TABLE Acheteur CASCADE;
+DROP TABLE Article CASCADE;
+DROP TABLE Livraison CASCADE;
+DROP TABLE Selection CASCADE;
+DROP TABLE Categorie CASCADE;
+DROP TABLE Produit CASCADE;
+DROP TABLE Image CASCADE;
+DROP TABLE ProduitSelection CASCADE;
+DROP TABLE Commentaire CASCADE;
+DROP TABLE ProduitDansPanier CASCADE;
+DROP TABLE Commande CASCADE;
+DROP TABLE ProduitDansCommande CASCADE;
+DROP TABLE Tag CASCADE;
+DROP TABLE TagProduit CASCADE;
+
+CREATE TABLE Utilisateur (
+id SERIAL PRIMARY KEY,
+motDePass VARCHAR(20) NOT NULL,
+nom VARCHAR(20),
+prenom VARCHAR(30),
+dateCreation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+email VARCHAR(30) NOT NULL UNIQUE,
+numeroTele VARCHAR(20)
+);
+
+CREATE TABLE Administrateur (
+id INTEGER PRIMARY KEY REFERENCES Utilisateur
+);
+
+
+CREATE TABLE Vendeur (
+id INTEGER PRIMARY KEY REFERENCES Utilisateur
+);
+
+CREATE TABLE Acheteur (
+id INTEGER PRIMARY KEY REFERENCES Utilisateur,
+newsletter BOOLEAN DEFAULT false NOT NULL
+);
+
+CREATE TABLE Article (
+idArticle SERIAL PRIMARY KEY,
+titre VARCHAR(30) NOT NULL,
+texte VARCHAR,
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+auteur VARCHAR,
+idAdministrateur INTEGER REFERENCES Administrateur(id) NOT NULL
+);
+
+
+CREATE TABLE Livraison (
+idAcheteur INTEGER REFERENCES Acheteur NOT NULL,
+idLivraison SERIAL PRIMARY KEY,
+adresse VARCHAR(50) NOT NULL,
+codePostal INTEGER NOT NULL,
+nom VARCHAR(30) NOT NULL,
+prenom VARCHAR(30)
+);
+
+CREATE TABLE Selection (
+idSelection SERIAL PRIMARY KEY,
+titre VARCHAR(50) NOT NULL,
+description VARCHAR,
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+idAdministrateur INTEGER REFERENCES Administrateur(id)
+);
+
+
+CREATE TABLE Categorie (
+nom VARCHAR(20) PRIMARY KEY,
+idAdministrateur INTEGER REFERENCES Administrateur,
+categorieMere VARCHAR(20) REFERENCES Categorie(nom),
+niveau INTEGER NOT NULL,
+CHECK(niveau=1 OR niveau=2 OR niveau=3 OR niveau=4),
+CHECK(niveau=1 OR categorieMere IS NOT NULL)
+);
+
+
+CREATE TABLE Produit (
+idProduit SERIAL PRIMARY KEY,
+nom VARCHAR(30),
+prix FLOAT NOT NULL CHECK (prix >= 0.0),
+description VARCHAR(200),
+prixPromotion FLOAT CHECK (prixPromotion >= 0.0),
+idVendeur INTEGER REFERENCES Vendeur NOT NULL,
+idCategorie VARCHAR(20) REFERENCES Categorie NOT NULL
+);
+
+
+CREATE TABLE Image (
+idProduit INTEGER REFERENCES Produit,
+idImage SERIAL PRIMARY KEY,
+photo bytea
+);
+
+
+CREATE TABLE ProduitSelection (
+idSelection INTEGER REFERENCES Selection,
+idProduit INTEGER REFERENCES Produit
+);
+
+CREATE TABLE Commentaire (
+idCommentaire SERIAL PRIMARY KEY,
+etoiles INTEGER NOT NULL CHECK(etoiles>=1 AND etoiles<=5),
+texte VARCHAR(200),
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+idAcheteur INTEGER REFERENCES Acheteur,
+idProduit INTEGER REFERENCES Produit
+);
+
+CREATE TABLE ProduitDansPanier (
+idAcheteur INTEGER REFERENCES Acheteur,
+idProduit INTEGER REFERENCES Produit,
+quantité INTEGER DEFAULT 1,
+PRIMARY KEY(idAcheteur,idProduit)
+);
+
+CREATE TABLE Commande (
+idAcheteur INTEGER REFERENCES Acheteur NOT NULL,
+idCommande SERIAL PRIMARY KEY,
+idAdresse INTEGER REFERENCES Livraison NOT NULL,
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+modeLivraison VARCHAR CHECK (modeLivraison = 'rapide' OR modeLivraison ='normal'),
+statut VARCHAR DEFAULT 'nonpaye' CHECK (statut = 'nonpaye' OR statut ='paye')
+);
+
+
+CREATE TABLE ProduitDansCommande (
+idCommande INTEGER REFERENCES Commande,
+idProduit INTEGER REFERENCES Produit,
+quantite INTEGER NOT NULL DEFAULT 1,
+prix FLOAT NOT NULL CHECK (prix >= 0.0),
+PRIMARY KEY(idCommande, idProduit)
+);
+
+
+
+CREATE TABLE Tag (
+idTag SERIAL PRIMARY KEY,
+texte VARCHAR(30) UNIQUE
+);
+
+CREATE TABLE TagProduit (
+idTag INTEGER REFERENCES Tag,
+idProduit INTEGER REFERENCES Produit,
+quantite INTEGER NOT NULL DEFAULT 1,
+PRIMARY KEY(idTag, idProduit)
+);
+
+
+CREATE VIEW ProduitPromotionList
+AS
+SELECT *
+FROM Produit
+WHERE prixPromotion IS NOT NULL;
+
+CREATE VIEW PrixActuel
+AS
+SELECT idProduit AS produit, prixPromotion AS prix
+FROM Produit 
+WHERE prixPromotion IS NOT NULL
+UNION
+SELECT idProduit AS produit, prix
+FROM Produit
+WHERE prixPromotion IS NULL;
+
+CREATE VIEW PrixCommande
+AS
+SELECT idCommande AS Commande ,sum(ProduitDansCommande.quantite*PrixActuel.prix) AS prix
+FROM ProduitDansCommande JOIN PrixActuel
+ON ProduitDansCommande.idProduit= PrixActuel.produit
+GROUP BY idCommande;

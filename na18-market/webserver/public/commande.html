@@ -1,0 +1,38 @@
+<div class="my-5 " ng-model="commande">
+    <div class="   shadow-lg p-3 m-4 bg-white rounded">
+        <h3>Informations d'achat</h3>
+        <div class="row">
+            <div class="col-3">E-mail: {{commande.email}}</div>
+            <div class="col-3">Commande ID: {{commande.idcommande}}</div>
+            <div class="col-3">Date: {{commande.date| limitTo: 19}}</div>
+            <div class="col-3">Statut: {{commande.statut}}</div>
+        </div>
+    </div>
+    <div class="   shadow-lg p-3 m-4 bg-white rounded">
+        <h3>Informations de livraison</h3>
+        <div class="row">
+            <div class="col-3">Nom: {{commande.nom}}</div>
+            <div class="col-4">Prénom: {{commande.prenom}}</div>
+            <div class="col-4">Mode de Livaison: {{commande.modelivraison}}</div>
+        </div>
+        <div class="row">
+            <div class="col-3">Code Postale: {{commande.codepostal}}</div>
+            <div class="col-9">Adresse: {{commande.adresse}}</div>
+        </div>
+    </div>
+    <div class="  shadow-lg p-3 m-4 bg-white rounded">
+        <h3>Liste de produits</h3>
+        <ul class="list-group" ng-repeat="x in commande.products">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-4">Nom: {{x.nom}}</div>
+                    <div class="col-4">Prix: {{x.prix}}€</div>
+                    <div class="col-4">Quantite: {{x.quantite}}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class=" p-3 ">
+        <button type="button" class=" btn btn-lg btn-block btn-primary">Prix: {{commande.prix}}€    Payer</button>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="text-center loginPage">
+    <form class="form-signin" name="registerForm" novalidate ng-submit="signupForm()">
+        <h1 class="h3 mb-3 font-weight-normal" >Veuillez vous inscrire</h1>
+        <input class="form-control" type="email" name="email" ng-model="user.email" required placeholder="Email addresse">
+        <div ng-if="registerForm.email.$dirty&& registerForm.email.$invalid&& registerForm.submitted">
+            <div ng-if="registerForm.email.$error.required">
+                Email ne peut pas être vide.
+            </div>
+            <div ng-if="registerForm.email.$error.email">
+                Erreur de format.
+            </div>
+        </div>
+        <input class="form-control" type="motdepasse" name="motDePass" ng-model="user.motDePass"  ng-minlength="5" ng-maxlength="20"required placeholder="Mot de passe">
+        <div ng-if="registerForm.motDePass.$dirty&& registerForm.motDePass.$invalid&& registerForm.submitted">
+            <div ng-if="registerForm.motDePass.$error.maxlength">
+                Mot de pass trop long.
+            </div>
+            <div ng-if="registerForm.motDePass.$error.minlength">
+                Mot de pass trop court.
+            </div>
+            <div ng-if="registerForm.motDePass.$error.required">
+                Mot de passe ne peut pas être vide.
+            </div>
+        </div>
+        <input class="form-control" type="nom" name="nom" ng-model="user.nom"  ng-maxlength="20"required placeholder="Nom">
+        <div ng-if="registerForm.nom.$dirty&& registerForm.nom.$invalid&& registerForm.submitted">
+            <div ng-if="registerForm.nom.$error.maxlength">
+                Nom trop long.
+            </div>
+            <div ng-if="registerForm.nom.$error.minlength">
+                Nom trop court.
+            </div>
+            <div ng-if="registerForm.nom.$error.required">
+                Nom ne peut pas être vide.
+            </div>
+        </div>
+        <input class="form-control" type="prenom" name="prenom" ng-model="user.prenom"  ng-maxlength="30"required placeholder="Prenom">
+        <div ng-if="registerForm.prenom.$dirty&& registerForm.prenom.$invalid">
+            <div ng-if="registerForm.prenom.$error.maxlength">
+                Prenom trop long.
+            </div>
+            <div ng-if="registerForm.prenom.$error.minlength">
+                Prenom trop court.
+            </div>
+            <div ng-if="registerForm.prenom.$error.required">
+                Prenom ne peut pas être vide.
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Créer</button>
+        <h1 class="h3 mb-3 font-weight-normal" ng-model="message">{{message}}</h1>
+    </form>
+
+</div>

@@ -1,0 +1,183 @@
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom, numeroTele )
+VALUES ('chenyan.zhu0707@gmail.com', 'zcy12341234', 'Zhu', 'Chenyan', '0669239047');
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom)
+VALUES ('tongzhou.wang@etu.utc.fr', '12341234', 'Wang', 'Tongzhou');
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom )
+VALUES ('yihui.yang@etu.utc.fr', '12341234', 'Yang', 'Yihui');
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom )
+VALUES ('test1@test.com', '12341234', 'testNom', 'testPrenom');
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom )
+VALUES ('test2@test.com', '12341234', 'testNom', 'testPrenom');
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom )
+VALUES ('test3@test.com', '12341234', 'testNom', 'testPrenom');
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom )
+VALUES ('test4@test.com', '12341234', 'testNom', 'testPrenom');
+INSERT INTO Utilisateur  (email, motDePass, nom, prenom )
+VALUES ('test5@test.com', '12341234', 'testNom', 'testPrenom');
+
+
+INSERT INTO Administrateur(id)
+VALUES(1);
+INSERT INTO Administrateur(id)
+VALUES(3);
+
+INSERT INTO Vendeur(id)
+VALUES(2);
+INSERT INTO Vendeur(id)
+VALUES(4);
+
+INSERT INTO Acheteur(id)
+VALUES(5);
+INSERT INTO Acheteur(id)
+VALUES(6);
+INSERT INTO Acheteur(id)
+VALUES(7);
+INSERT INTO Acheteur(id)
+VALUES(8);
+
+INSERT INTO Livraison(idAcheteur, adresse,codePostal,nom,prenom)
+VALUES(5,'utc FA100',60200,'testnom','testprenom');
+INSERT INTO Livraison(idAcheteur, adresse,codePostal,nom,prenom)
+VALUES(5,'utc FA101',60200,'testnom','testprenom');
+INSERT INTO Livraison(idAcheteur, adresse,codePostal,nom,prenom)
+VALUES(6,'utc FA102',60200,'testnom','testprenom');
+INSERT INTO Livraison(idAcheteur, adresse,codePostal,nom,prenom)
+VALUES(7,'utc FA103',60200,'testnom','testprenom');
+
+INSERT INTO Selection(titre, description,idAdministrateur)
+VALUES('titre1','testdescription',1);
+INSERT INTO Selection(titre, description,idAdministrateur)
+VALUES('titre2','testdescription',1);
+INSERT INTO Selection(titre, description,idAdministrateur)
+VALUES('titre3','testdescription',1);
+
+
+INSERT INTO Categorie(nom, idAdministrateur,niveau)
+VALUES('Vetement',1,1);
+INSERT INTO Categorie(nom, idAdministrateur,niveau)
+VALUES('Chaussure',1,1);
+INSERT INTO Categorie(nom, idAdministrateur,niveau)
+VALUES('Meuble',1,1);
+
+
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie, prixPromotion)
+VALUES('Vetement1','5','testdescription1',2,'Vetement',1);
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Vetement2','10','testdescription2',2,'Vetement');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Vetement3','15','testdescription3',2,'Vetement');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Vetement4','20','testdescription4',2,'Vetement');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Vetement5','25','testdescription5',2,'Vetement');
+
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie, prixPromotion)
+VALUES('Chaussure1','50','testdescription6',2,'Chaussure',10);
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Chaussure2','100','testdescription7',2,'Chaussure');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Chaussure3','150','testdescription8',2,'Chaussure');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Chaussure4','200','testdescription9',2,'Chaussure');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Chaussure5','250','testdescription10',2,'Chaussure');
+
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie, prixPromotion)
+VALUES('Meuble1','500','testdescription6',2,'Meuble',100);
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Meuble2','1000','testdescription7',2,'Meuble');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Meuble3','1500','testdescription8',2,'Meuble');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Meuble4','2000','testdescription9',2,'Meuble');
+INSERT INTO Produit(nom, prix,description,idVendeur,idCategorie)
+VALUES('Meuble5','2500','testdescription10',2,'Meuble');
+
+
+INSERT INTO ProduitSelection(idSelection, idProduit)
+VALUES(1,1);
+INSERT INTO ProduitSelection(idSelection, idProduit)
+VALUES(1,2);
+INSERT INTO ProduitSelection(idSelection, idProduit)
+VALUES(1,3);
+INSERT INTO ProduitSelection(idSelection, idProduit)
+VALUES(2,5);
+
+INSERT INTO Commentaire(etoiles, texte,idAcheteur,idProduit)
+VALUES(5,'texte1',5,1);
+INSERT INTO Commentaire(etoiles, texte,idAcheteur,idProduit)
+VALUES(4,'texte2',5,6);
+INSERT INTO Commentaire(etoiles, texte,idAcheteur,idProduit)
+VALUES(3,'texte3',6,3);
+INSERT INTO Commentaire(etoiles, texte,idAcheteur,idProduit)
+VALUES(2,'texte4',7,4);
+INSERT INTO Commentaire(etoiles, texte,idAcheteur,idProduit)
+VALUES(1,'texte5',6,3);
+
+
+INSERT INTO ProduitDansPanier(idAcheteur, idProduit)
+VALUES(5,1);
+INSERT INTO ProduitDansPanier(idAcheteur, idProduit)
+VALUES(5,3);
+INSERT INTO ProduitDansPanier(idAcheteur, idProduit)
+VALUES(5,4);
+INSERT INTO ProduitDansPanier(idAcheteur, idProduit)
+VALUES(6,2);
+INSERT INTO ProduitDansPanier(idAcheteur, idProduit)
+VALUES(6,6);
+
+INSERT INTO Commande(idAcheteur,idAdresse,modeLivraison)
+VALUES(5,1,'normal');
+INSERT INTO Commande(idAcheteur, idAdresse,modeLivraison)
+VALUES(6,3,'normal');
+INSERT INTO Commande(idAcheteur, idAdresse,modeLivraison)
+VALUES(5,2,'rapide');
+INSERT INTO Commande(idAcheteur, idAdresse,modeLivraison)
+VALUES(5,3,'rapide');
+
+INSERT INTO ProduitDansCommande(idCommande, idProduit,quantite,prix)
+VALUES(1,1,1,3.5);
+INSERT INTO ProduitDansCommande(idCommande, idProduit,quantite,prix)
+VALUES(1,2,3,15555);
+INSERT INTO ProduitDansCommande(idCommande, idProduit,quantite,prix)
+VALUES(1,3,2,123914);
+INSERT INTO ProduitDansCommande(idCommande, idProduit,quantite,prix)
+VALUES(2,1,1,3.5);
+INSERT INTO ProduitDansCommande(idCommande, idProduit,quantite,prix)
+VALUES(3,4,4,234123);
+INSERT INTO ProduitDansCommande(idCommande, idProduit,quantite,prix)
+VALUES(3,3,2,99881);
+INSERT INTO ProduitDansCommande(idCommande, idProduit,quantite,prix)
+VALUES(3,2,10,12);
+
+INSERT INTO Tag(texte)
+VALUES('rapide');
+INSERT INTO Tag(texte)
+VALUES('jolie');
+INSERT INTO Tag(texte)
+VALUES('sympa');
+INSERT INTO Tag(texte)
+VALUES('laid');
+INSERT INTO Tag(texte)
+VALUES('ca va');
+
+INSERT INTO TagProduit(idTag,idProduit,quantite)
+VALUES(1,1,1);
+INSERT INTO TagProduit(idTag,idProduit,quantite)
+VALUES(4,2,10);
+INSERT INTO TagProduit(idTag,idProduit,quantite)
+VALUES(4,4,3100);
+INSERT INTO TagProduit(idTag,idProduit,quantite)
+VALUES(2,3,100);
+
+
+
+
+
+
+
+
+
+
+
+
